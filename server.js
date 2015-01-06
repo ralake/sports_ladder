@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
+var router = express.Router();
 var server = require('http').createServer(app);
 var database = require('./config/database');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/public'));
 app.set('dbUrl', database.db[app.settings.env]);
@@ -14,7 +16,13 @@ db.once('open', function (callback) {
   console.log("DB connected lads");
 });
 
-app.get('/', function(request, response){
+app.use(bodyParser.urlencoded({'extended':'true'}));            
+app.use(bodyParser.json());                                     
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
+
+require('./app/routes')(app, router);
+
+app.get('*', function(request, response){
   response.sendFile('index.html');
 });
 
