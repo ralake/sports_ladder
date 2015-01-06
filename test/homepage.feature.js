@@ -14,9 +14,9 @@ describe('Homepage', function (){
 
   });
 
-  describe('Adding a player', function() {
+  describe('There are players', function() {
 
-    it('allows a player to be added to the ladder', function() {
+    it('shows a player', function() {
       casper.then(function() {
         this.fill('form[id="addplayer"]',{
         name: 'Rich'
