@@ -1,10 +1,35 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE HTML> 
+<html ng-app="SportsLadder">
   <head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/controllers/main.js"></script>
+    <script src="js/services/players.js"></script>
+    <script src="js/core.js"></script>
+    <title>Table Tennis LADder</title>
   </head>
-  <body>
-  <p>There are no Players</p>
-  <form>
-  </form>
+  <body ng-controller="mainController">  
+    <h1>Table Tennis LADr</h1>
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-md-6">#</th>
+        <th class="col-md-6">Name</th>
+      </tr>
+    </thead>
+    <tbody ng-repeat="player in players">
+      <tr>
+        <td></td>
+        <td> {{ player.name }} </td>
+      </tr>
+    </tbody>
+    </table>
+    <noplayers ng-hide="players">There are no players</noplayers>
+    <form id="addplayer" class="col-lg-6">
+      <input name="name" placeholder="Name" class="form-control col-md-4" type="text" ng-model="formData.name">
+      <button class="btn btn-default btn-primary" type="submit" value="Add Player" ng-click="createPlayer()">Add Player</button>
+    </form>
   </body>
 </html>

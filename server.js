@@ -19,6 +19,7 @@ db.once('open', function (callback) {
 app.use(bodyParser.urlencoded({'extended':'true'}));            
 app.use(bodyParser.json());                                     
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 require('./app/routes')(app, router);
 
