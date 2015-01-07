@@ -4,15 +4,15 @@ var routes = function(app, router) {
   var getPlayers = function(Player, response) {
     Player.find(function(err, players) {
       if (err)
-        response.send(err)
+        response.send(err);
       response.json(players);
     });
-  }
+  };
 
   router.route('/players')
 
     .get(function(request, response) {
-      getPlayers(Player, response)
+      getPlayers(Player, response);
     })
 
     .post(function(request, response){
@@ -32,6 +32,6 @@ var routes = function(app, router) {
 
   app.use('/api', router);
  
-}
+};
 
 module.exports = routes;
