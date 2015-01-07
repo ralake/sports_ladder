@@ -12,8 +12,12 @@ var routes = function(app, router) {
     })
 
     .post(function(request, response){
+      Player.find(function(err, players) {
+          if (err)
+            response.send(err)
       Player.create({
-        name : request.body.name
+        name : request.body.name,
+        rank : (players.length + 1) 
       }, function(err, player) {
         if (err)
           response.send(err)
@@ -21,6 +25,7 @@ var routes = function(app, router) {
           if (err)
             response.send(err)
           response.json(players);
+        })
         });
       }); 
     });

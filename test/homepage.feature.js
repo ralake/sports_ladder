@@ -22,11 +22,11 @@ describe('Homepage', function (){
         name: 'Ben'
         }, true);
         this.click('button[value="Add Player"]');
-        casper.then(function(){
+      });
+        casper.thenOpen('http://localhost:3000/', function(){
           expect("body").to.contain.text("Ben");
           "noplayers".should.be.inDOM.and.not.be.visible;
         });
-      });
     });
 
     it('shows the player\'s rank', function() {

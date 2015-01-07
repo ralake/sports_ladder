@@ -8,7 +8,7 @@ app.use(express.static(__dirname + '/public'));
 
 var server = require('http').createServer(app);
 var database = require('./config/database');
-app.set('dbUrl', database.db[process.env.NODE_ENV]);
+app.set('dbUrl', database.db[process.env.NODE_ENV || "development"]);
 mongoose.connect(app.get('dbUrl'));
 
 var mdb = mongoose.connection;
