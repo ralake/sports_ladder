@@ -19,4 +19,15 @@ angular.module("playerController", [])
       }
     };
 
+    $scope.updateLadder = function() {
+      if (!$.isEmptyObject($scope.formData)) {
+        Players.update($scope.formData)
+        .success(function(data) {
+          $scope.formData = {};
+          $scope.players = data;
+        });
+      }
+
+    };
+
   });

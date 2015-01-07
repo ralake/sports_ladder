@@ -6,6 +6,9 @@ angular.module("playerService", [])
       },
       create : function(playerData) {
         return $http.post('/api/players', playerData);
+      },
+      update : function(playerData) {
+        return $http.post('/api/search', playerData);
       }
     }
   });

@@ -31,5 +31,10 @@
       <input name="name" placeholder="Name" class="form-control col-md-4" type="text" ng-model="formData.name">
       <button class="btn btn-default btn-primary" type="submit" value="Add Player" ng-click="createPlayer()">Add Player</button>
     </form>
+    <form id="update-rank" class="col-lg-6">
+      <input name="winner" placeholder="Winner..." class="form-control col-md-4" type="text" ng-model="formData.winner">
+      <input name="loser" placeholder="Loser..." class="form-control col-md-4" type="text" ng-model="formData.loser">
+      <button class="btn btn-default btn-primary" type="submit" value="Update Ladder" ng-click="updateLadder()">Update Ladder</button>
+    </form>
   </body>
 </html>

@@ -2,10 +2,10 @@ var Player = require('./models/Player');
 var routes = function(app, router) {
 
   var getPlayers = function(Player, response) {
-    Player.find(function(err, players) {
+    Player.find().sort('rank').exec(function(err, players) {
       if (err)
-        response.send(err);
-      response.json(players);
+        response.send(err)
+      response.json(players)
     });
   };
 
@@ -28,6 +28,32 @@ var routes = function(app, router) {
         getPlayers(Player, response);
         });
       }); 
+    });
+
+  router.route('/search')
+
+    .post(function(request, response) {
+      Player.findOne({ name: request.body.winner }, function(err, winner) {
+        if (err)
+          response.send(err)
+        var winnerRank = winner.rank
+        Player.findOne({ name: request.body.loser }, function(err, loser) {
+          if (err)
+            response.send(err)
+          var loserRank = loser.rank
+          winner.rank = loserRank
+          winner.save(function(err) {
+            if (err)
+              response.send(err)
+          });
+          loser.rank = winnerRank
+          loser.save(function(err) {
+            if (err)
+              response.send(err)
+            getPlayers(Player, response);
+          });
+        });
+      });
     });
 
   app.use('/api', router);
