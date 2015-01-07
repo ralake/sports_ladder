@@ -29,6 +29,17 @@ describe('Homepage', function (){
       });
     });
 
+    it('shows the player\'s rank', function() {
+      casper.then(function() {
+        this.fill('form[id="addplayer"]',{
+        name: 'Nick'
+        }, true);
+        this.click('button[value="Add Player"]');
+        casper.then(function(){
+          expect("body").to.contain.text("1");
+          expect("body").to.contain.text("2");
+        });
+      });
+    });
   });
-
 });

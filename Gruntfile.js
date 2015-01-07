@@ -49,6 +49,21 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.registerTask('default', ['express', 'mocha_casperjs']);
+  grunt.registerTask('default', [ 'express', 'mocha_casperjs']);
+
+  grunt.registerTask('drop', 'drop the database', function() {
+  var done = this.async();
+
+  db.mongoose.connection.on('open', function () { 
+    db.mongoose.connection.db.dropDatabase(function(err) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log('Successfully dropped db');
+      }
+      db.mongoose.connection.close(done);
+    });
+  });
+});
 
 };
