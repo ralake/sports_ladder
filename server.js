@@ -25,7 +25,7 @@ app.use('/bower_components', express.static(__dirname + '/bower_components'));
 require('./app/routes')(app, router);
 
 app.get('*', function(request, response){
-  response.sendFile('/index.html');
+  response.sendFile('./index.html');
 });
 
 server.listen(3000, function() {

@@ -1,14 +1,18 @@
 var Player = require('./models/Player');
 var routes = function(app, router) {
 
+  var getPlayers = function(Player, response) {
+    Player.find(function(err, players) {
+      if (err)
+        response.send(err)
+      response.json(players);
+    });
+  }
+
   router.route('/players')
 
     .get(function(request, response) {
-      Player.find(function(err, players) {
-        if (err)
-          response.send(err)
-        response.json(players);
-      });
+      getPlayers(Player, response)
     })
 
     .post(function(request, response){
@@ -21,18 +25,13 @@ var routes = function(app, router) {
       }, function(err, player) {
         if (err)
           response.send(err)
-        Player.find(function(err, players) {
-          if (err)
-            response.send(err)
-          response.json(players);
-        })
+        getPlayers(Player, response);
         });
       }); 
     });
 
   app.use('/api', router);
-
-  
+ 
 }
 
 module.exports = routes;
