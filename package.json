@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "npm install && bower install"
+    "postinstall": "npm install"
   },
   "repository": {
     "type": "git",
