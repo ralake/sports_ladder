@@ -36,9 +36,10 @@ module.exports = function(grunt) {
     },
     express: {
       options:{},
-      dev: {
+      test: {
         options: {
-          script: './server.js'
+          script: './server.js',
+          node_env: 'test'
         }
       }
     }
@@ -48,6 +49,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.registerTask('default', ['express', 'mochaTest', 'mocha_casperjs']);
+  grunt.registerTask('default', ['express', 'mocha_casperjs']);
 
 };

@@ -1,14 +1,14 @@
 describe('Homepage', function (){
 
   before(function () {
-    casper.start('http://localhost:3000');
+    casper.start('http://localhost:3000/');
   });
 
   describe('There are no players', function () {
 
     it('shows an empty ladder', function () {
       casper.then(function () {
-        expect("body").to.contain.text("There are no Players");
+        expect("body").to.contain.text("There are no players");
       });
     });
 
@@ -19,13 +19,16 @@ describe('Homepage', function (){
     it('shows a player', function() {
       casper.then(function() {
         this.fill('form[id="addplayer"]',{
-        name: 'Rich'
+        name: 'Ben'
         }, true);
         this.click('button[value="Add Player"]');
+        casper.then(function(){
+          expect("body").to.contain.text("Ben");
+          "noplayers".should.be.inDOM.and.not.be.visible;
         });
-        expect("body").to.contain.text("Rich");
-        "There are no Players".should.be.inDOM.and.not.be.visible;
       });
     });
 
   });
+
+});
