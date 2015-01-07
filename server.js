@@ -14,7 +14,7 @@ mongoose.connect(app.get('dbUrl'));
 var mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, 'connection error:'));
 mdb.once('open', function (callback) {
-  console.log("DB connected lads");
+  console.log(process.env.NODE_ENV + " DB connected lads");
 });
 
 app.use(bodyParser.urlencoded({'extended':'true'}));            
