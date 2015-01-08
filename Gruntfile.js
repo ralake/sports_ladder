@@ -24,7 +24,7 @@ module.exports = function(grunt) {
           reporter: 'spec',
           quiet: false
         },
-      src: ['spec/**/*.js']
+      src: ['spec/players/*.js']
       }
     },
     mocha_casperjs: {
@@ -42,6 +42,16 @@ module.exports = function(grunt) {
           node_env: 'test'
         }
       }
+    },
+    env : {
+      test : {
+        NODE_ENV : 'test'
+      },
+    },
+    execute: {
+      target: {
+        src: ['./spec/api_tests/query.js']
+      }
     }
   });
 
@@ -49,6 +59,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-express-server');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.registerTask('default', ['express', 'mocha_casperjs']);
+  grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-execute');
+  grunt.registerTask('default', ['env:test','express', 'mocha_casperjs', 'execute']);
 
 };
