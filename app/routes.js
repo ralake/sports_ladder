@@ -1,4 +1,4 @@
-var Player = require('./models/Player');
+var Player = require('./models/player');
 var routes = function(app, router) {
 
   var getPlayers = function(Player, response) {
