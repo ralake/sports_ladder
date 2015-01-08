@@ -32,4 +32,5 @@ var port = process.env.PORT || 3000;
 
 server.listen(port, function() {
   console.log('Server Listening Lads, on ' + port + ' lads');
+  console.log("Environment: " + process.env.NODE_ENV)
 });
