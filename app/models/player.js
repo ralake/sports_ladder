@@ -3,12 +3,27 @@ module.exports = function(playerRepo) {
   return {
 
     getPlayers: function(response) {
-      playerRepo.find().sort('rank').exec(function(err, players) {
-        if (err)
-          response.send(err)
-        response.json(players)
-      });
+       playerRepo.find().sort('rank').exec(function (err, players) {
+       if (err)
+         responce.send(err)
+       response.json(players); 
+     });
     },
+
+    addPlayer: function(request, response, callback) {
+      playerRepo.find(function(err, players) {
+        if (err)
+          console.log(err)
+        playerRepo.create({
+          name : request.body.name,
+          rank : (players.length + 1)
+        }, function(err, player){
+          if (err)
+            console.log(err)
+          });
+      });
+      callback();
+    }, 
 
     updatePlayerRanks: function(requestWinner, requestLoser){
       this.repository.findOne({ name: requestWinner.name }, function(err, winner) {

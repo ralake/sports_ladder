@@ -10,25 +10,16 @@ var routes = function(app, router) {
 //    });
 //  };
 
+  function returnPlayers(players){ return players };
+
   router.route('/players')
 
     .get(function(request, response) {
-        Player(PlayerRepository).getPlayers(response)
-    })
+      Player(PlayerRepository).getPlayers(response) 
+      })
 
     .post(function(request, response){
-      PlayerRepository.find(function(err, players) {
-          if (err)
-            response.send(err)
-      PlayerRepository.create({
-        name : request.body.name,
-        rank : (players.length + 1) 
-      }, function(err, player) {
-        if (err)
-          response.send(err)
-        Player(PlayerRepository).getPlayers(response)
-        });
-      }); 
+      Player(PlayerRepository).addPlayer(request, response, getPlayers(response))
     });
 
   router.route('/search')
