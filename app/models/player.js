@@ -1,11 +1,38 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+module.exports = function(playerRepo) {
 
-var PlayerSchema = new Schema({
-  name: {type : String, default: ''},
-  rank: {type : Number}
-});
+  return {
 
-var Player = mongoose.model('Player', PlayerSchema);
+    getPlayers: function(response) {
+      playerRepo.find().sort('rank').exec(function(err, players) {
+        if (err)
+          response.send(err)
+        response.json(players)
+      });
+    },
 
-module.exports = Player;
+    updatePlayerRanks: function(requestWinner, requestLoser){
+      this.repository.findOne({ name: requestWinner.name }, function(err, winner) {
+        if (err)
+          response.send(err)
+        var winnerRank = winner.rank
+       this.repository.findOne({ name: requestLoser.name }, function(err, loser) {
+          if (err)
+            response.send(err)
+          var loserRank = loser.rank
+          winner.rank = loserRank
+          winner.save(function(err) {
+            if (err)
+              response.send(err)
+          });
+          loser.rank = winnerRank
+         loser.save(function(err) {
+            if (err)
+              response.send(err)
+            getPlayers();
+          });
+        });
+      });
+    }
+
+  };
+};

@@ -1,72 +1,56 @@
 <!DOCTYPE HTML> 
 <html ng-app="SportsLadder">
-<head>
-<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
-<script src="/bower_components/jquery/dist/jquery.js"></script>
-<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="/bower_components/angular/angular.js"></script>
-<script src="/bower_components/angular-resource/angular-resource.js"></script>
-<script src="js/controllers/main.js"></script>
-<script src="js/services/players.js"></script>
-<script src="js/core.js"></script>
-<title>Sports Ladder</title>
-</head>
-<body ng-controller="mainController">  
-<h1>Sports Ladder</h1>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th class="col-md-6">Rank</th>
-      <th class="col-md-6">Name</th>
-    </tr>
-  </thead>
-  <tbody ng-repeat="player in players">
-  <tr class="{{player.name}}">
-    <td> {{ player.rank }} </td>
-    <td> {{ player.name }} </td>
-  </tr>
-  </tbody>
-</table>
-<noplayers ng-hide="players">There are no players</noplayers>
-<div class="row">
-  <div class="col-lg-6">
-    <form id="addplayer">
-      <div class="input-group">
-        <input name="name" placeholder="Name" class="form-control col-md-4" type="text" ng-model="formData.name">
-        <span class="input-group-btn">
-          <button class="btn btn-default btn-primary" type="submit" value="Add Player" ng-click="createPlayer()">Add Player</button>
-        </span>
-      </div>
-    </form>
-  </div>
-</div>
-<div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" aria-label="...">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Player <span class="caret"></span></button>
-        <ul class="dropdown-menu" role="menu">           
-          <li ng-repeat="player in players"> {{ player.name }} </li>
-        </ul>
+  <head>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/controllers/main.js"></script>
+    <script src="js/services/players.js"></script>
+    <script src="js/core.js"></script>
+    <title>Sports Ladder</title>
+  </head>
+  <body ng-controller="mainController">  
+    <h1>Sports Ladder</h1>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-6">Rank</th>
+          <th class="col-md-6">Name</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="player in players">
+        <tr class="{{player.name}}">
+          <td> {{ player.rank }} </td>
+          <td> {{ player.name }} </td>
+        </tr>
+      </tbody>
+    </table>
+    <noplayers ng-hide="players">There are no players</noplayers>
+    <div class="row">
+      <div class="col-lg-6">
+        <form id="addplayer">
+          <div class="input-group">
+            <input name="name" placeholder="Name" class="form-control col-md-4" type="text" ng-model="formData.name">
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-primary" type="submit" value="Add Player" ng-click="createPlayer()">Add Player</button>
+            </span>
+          </div>
+        </form>
       </div>
     </div>
-  </div>
-</div>
-<form id="update-rank" class="col-lg-6">
+    <form id="update-rank" class="col-lg-6">
 
-  <select ng-init="formData.winner" = options[0]" name="winner" class="form-control" ng-model="formData.winner" ng-options="player.name for player in players">
-    <option value=""> Player 1</option>
-  </select>
+      <select ng-init="formData.winner" = options[0]" name="winner" class="form-control" ng-model="formData.winner" ng-options="player.name for player in players">
+        <option value=""> Player 1</option>
+      </select>
 
-  <select name="loser" class="form-control" ng-model="formData.loser">
-    <option selected="true" style="display:none;"> Player 2</option>
-    <option value="{{player.name}}" ng-repeat="player in players">{{ player.rank }} : {{ player.name }}</option>
-  </select>
+      <select ng-init="formData.loser" = options[0]" name="loser" class="form-control" ng-model="formData.loser" ng-options="player.name for player in players">
+        <option value=""> Player 2</option>
+      </select>
 
-  <input name="winner" placeholder="Player 1" class="form-control col-md-4" type="text" ng-model="formData.winner">
-  <input name="loser" placeholder="Player 2" class="form-control col-md-4" type="text" ng-model="formData.loser">
-  <button class="btn btn-default btn-primary" type="submit" value="Update Ladder" ng-click="updateLadder()">Swap</button>
-</form>
-</body>
+      <button class="btn btn-default btn-primary" type="submit" value="Update Ladder" ng-click="updateLadder()">Swap</button>
+    </form>
+  </body>
 </html>

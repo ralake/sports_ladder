@@ -4,7 +4,7 @@
 var utils = require('../utils');
 var should = require('should');
 // import our User mongoose model
-var Player = require('../../app/models/player.js');
+var Player = require('../../app/models/playerrepository.js');
 
 describe('Player: models', function () {
 
