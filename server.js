@@ -28,6 +28,8 @@ app.get('*', function(request, response){
   response.sendFile('./index.html');
 });
 
-server.listen(3000, function() {
-  console.log('Server Listening Lads, on port :3000 Lads');
+var port = process.env.PORT || 3000;
+
+server.listen(port, function() {
+  console.log('Server Listening Lads, on ' + port ' lads');
 });
