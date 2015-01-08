@@ -1,4 +1,6 @@
 #Makers Academy Week 9: Makerthon Week (Sports Ladder)
+[![Test Coverage](https://codeclimate.com/github/ralake/sports_ladder/badges/coverage.svg)](https://codeclimate.com/github/ralake/sports_ladder)
+[![Code Climate](https://codeclimate.com/github/ralake/sports_ladder/badges/gpa.svg)](https://codeclimate.com/github/ralake/sports_ladder)
 
 Image to go here. 
     

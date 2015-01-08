@@ -1,0 +1,20 @@
+TN:
+SF:/Users/richardlake/projects/sports_ladder/Gruntfile.js
+FN:1,(anonymous_1)
+FNF:1
+FNH:1
+FNDA:1,(anonymous_1)
+DA:1,1
+DA:3,1
+DA:48,1
+DA:49,1
+DA:50,1
+DA:51,1
+DA:52,1
+LF:7
+LH:7
+BRF:0
+BRH:0
+end_of_record
+
+CODECLIMATE_REPO_TOKEN=e65c07a8c06a93e125ea92db219dea453505efb3058b6e65c5adf90a6536cd6d codeclimate < lcov.info
