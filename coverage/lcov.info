@@ -17,4 +17,4 @@ BRF:0
 BRH:0
 end_of_record
 
-CODECLIMATE_REPO_TOKEN=e65c07a8c06a93e125ea92db219dea453505efb3058b6e65c5adf90a6536cd6d codeclimate < lcov.info
+process.env.CODECLIMATE_REPO_TOKEN codeclimate < lcov.info
