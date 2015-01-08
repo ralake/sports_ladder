@@ -31,5 +31,5 @@ app.get('*', function(request, response){
 var port = process.env.PORT || 3000;
 
 server.listen(port, function() {
-  console.log('Server Listening Lads, on ' + port ' lads');
+  console.log('Server Listening Lads, on ' + port + ' lads');
 });
