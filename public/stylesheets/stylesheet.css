@@ -23,12 +23,13 @@ body {
 
 #ladder {
   font-family: "Avenir";
-  width: 55%;
+  width: 25%;
   border-color: gray;
   border-radius: 5px;
   overflow: hidden;
   background-color: rgba(0.5,0.5,0.5,0.5);
   color: #5A5A5A;
+  font-size: 2em;
 }
 
 #ladder_row:hover {
@@ -37,7 +38,17 @@ body {
 }
 
 #rank {
-  width: 50%;
+  width: 10%;
+  border-bottom: solid 1px #5A5A5A;
+}
+
+.rankright {
+  text-align: right;
+}
+
+#name{
+  text-align: center;
+  border-bottom: solid 1px #5A5A5A;
 }
 
 form {

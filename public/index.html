@@ -14,16 +14,11 @@
   <body ng-controller="mainController">  
     <h1>sportslad</h1>
     <table id="ladder">
-      <thead>
-        <tr>
-          <th id="rank">Rank</th>
-          <th>Name</th>
-        </tr>
-      </thead>
       <tbody ng-repeat="player in players">
         <tr class="{{player.name}}" id="ladder_row">
-          <td> {{ player.rank }} </td>
-          <td> {{ player.name }} </td>
+          <td id="rank"> {{ player.rank }} </td>
+          <td id="name"> {{ player.name }} </td>
+          <td id="rank" class="rankright"> {{ player.rank }} </td>
         </tr>
       </tbody>
     </table>
