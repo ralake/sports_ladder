@@ -22,6 +22,7 @@ body {
 }
 
 #ladder {
+  float:left;
   font-family: "Avenir";
   width: 25%;
   border-color: gray;
@@ -29,7 +30,7 @@ body {
   overflow: hidden;
   background-color: rgba(0.5,0.5,0.5,0.5);
   color: #5A5A5A;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 #ladder_row:hover {
@@ -85,6 +86,8 @@ form {
 .form-control {
   background: Transparent;
   color: #5A5A5A;
+  border: 1px solid #5A5A5A;
+  font-size: 15px;
 }
 
 .form-control:focus {
@@ -92,4 +95,16 @@ form {
 }
 
 .form-control-option {
+}
+
+#addplayer {
+  clear:left;
+  float:left;
+  padding-top: 2%;
+}
+
+#update-rank {
+  clear:left;
+  float:left;
+  padding-top: 2%;
 }
