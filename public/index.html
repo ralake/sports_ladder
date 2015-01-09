@@ -12,7 +12,7 @@
     <title>Sports Ladder</title>
   </head>
   <body ng-controller="mainController">  
-    <h1>Sports Ladder</h1>
+    <h1>sportslad</h1>
     <table id="ladder">
       <thead>
         <tr>
@@ -30,21 +30,21 @@
     <noplayers ng-hide="players">There are no players</noplayers>
         <form id="addplayer">
           <div class="input-group">
-            <input name="name" placeholder="Name" type="text" ng-model="formData.name">
+            <input id="input_name" name="name" placeholder="Enter Name..." type="text" ng-model="formData.name">
               <button class="button" type="submit" value="Add Player" ng-click="createPlayer()">Add Player</button>
           </div>
         </form>
     <form id="update-rank" class="col-lg-6">
 
       <select ng-init="formData.winner" = options[0]" name="winner" class="form-control" ng-model="formData.winner" ng-options="player.name for player in players">
-        <option value=""> Player 1</option>
+        <option class="form-control-option" value="">Select Player 1 </option>
       </select>
 
       <select ng-init="formData.loser" = options[0]" name="loser" class="form-control" ng-model="formData.loser" ng-options="player.name for player in players">
-        <option value=""> Player 2</option>
+        <option value=""> Select Player 2</option>
       </select>
 
-      <button class="btn btn-default btn-primary" type="submit" value="Update Ladder" ng-click="updateLadder()">Swap</button>
+      <button class="button" type="submit" value="Update Ladder" ng-click="updateLadder()">Swap</button>
     </form>
   </body>
 </html>

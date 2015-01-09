@@ -1,6 +1,16 @@
 h1 {
   font-family: "Avenir";
   color: white;
+  float: right;
+  font-size: 3.5em;
+  letter-spacing: -1px;
+  font-weight: bold;
+  -moz-transform: rotate(30deg);  /* FF3.5+ */
+  -o-transform: rotate(30deg);  /* Opera 10.5 */
+  -webkit-transform: rotate(30deg);  /* Saf3.1+, Chrome */
+  -ms-transform: rotate(30deg);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);  /* IE6,IE7 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)"; /* IE8 */
 }
 
 body {
@@ -30,9 +40,45 @@ body {
   width: 50%;
 }
 
+form {
+  font-family: "Avenir";
+}
+
 .button {
   border-radius: 4px;
   text-decoration: none;
-  border: 2px solid #5A5A5A;
+  border: 1px solid #5A5A5A;
+  background: Transparent;
+  color: #5A5A5A;
+  font-size: 15px;
 
+}
+
+::-webkit-input-placeholder {
+   color: #5A5A5A;
+}
+
+#input_name {
+  background: Transparent;
+  border-radius: 4px;
+  border: 1px solid #5A5A5A;
+  color: #5A5A5A;
+  font-size: 15px;
+  padding-left: 3px;
+}
+
+#input_name:focus {
+  outline: none;
+}
+
+.form-control {
+  background: Transparent;
+  color: #5A5A5A;
+}
+
+.form-control:focus {
+  outline: none;
+}
+
+.form-control-option {
 }
