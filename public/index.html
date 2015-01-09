@@ -25,11 +25,11 @@
     <noplayers ng-hide="players">There are no players</noplayers>
     <form id="update-rank" class="col-lg-6">
 
-      <select ng-init="formData.winner" = options[0]" name="winner" class="form-control" ng-model="formData.winner" ng-options="player.name for player in players">
+      <select ng-init="formData.winner = options[0]" name="winner" class="form-control" ng-model="formData.winner" ng-options="player.name for player in players">
         <option class="form-control-option" value="">Select Player 1 </option>
       </select>
 
-      <select ng-init="formData.loser" = options[0]" name="loser" class="form-control" ng-model="formData.loser" ng-options="player.name for player in players">
+      <select ng-init="formData.loser = options[0]" name="loser" class="form-control" ng-model="formData.loser" ng-options="player.name for player in players">
         <option value=""> Select Player 2</option>
       </select>
 
