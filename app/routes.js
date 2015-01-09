@@ -1,32 +1,31 @@
-var PlayerRepository = require('./models/playerrepository');
-var Player = require('./models/player');
+var Player = require('./models/playerrepository');
 var routes = function(app, router) {
 
-//  var getPlayers = function(Player, response) {
-//    Player.find().sort('rank').exec(function(err, players) {
-//      if (err)
-//        response.send(err)
-//      response.json(players)
-//    });
-//  };
+  var getPlayers = function(Player, response) {
+    Player.find().sort('rank').exec(function(err, players) {
+      if (err)
+        response.send(err)
+      response.json(players)
+    });
+  };
 
   router.route('/players')
 
     .get(function(request, response) {
-        Player(PlayerRepository).getPlayers(response)
+      getPlayers(Player, response);
     })
 
     .post(function(request, response){
-      PlayerRepository.find(function(err, players) {
+      Player.find(function(err, players) {
           if (err)
             response.send(err)
-      PlayerRepository.create({
+      Player.create({
         name : request.body.name,
         rank : (players.length + 1) 
       }, function(err, player) {
         if (err)
           response.send(err)
-        Player(PlayerRepository).getPlayers(response)
+        getPlayers(Player, response);
         });
       }); 
     });
@@ -34,10 +33,27 @@ var routes = function(app, router) {
   router.route('/search')
 
     .post(function(request, response) {
-      var player = new Player(PlayerRepository)
-      player.updatePlayerRanks(request.body.winner, request.body.loser, function(err, updatedLadder) {
-        response.json(updatedLadder)
+      Player.findOne({ name: request.body.winner.name }, function(err, winner) {
+        if (err)
+          response.send(err)
+        var winnerRank = winner.rank
+        Player.findOne({ name: request.body.loser.name }, function(err, loser) {
+          if (err)
+            response.send(err)
+          var loserRank = loser.rank
+          winner.rank = loserRank
+          winner.save(function(err) {
+            if (err)
+              response.send(err)
+          });
+          loser.rank = winnerRank
+          loser.save(function(err) {
+            if (err)
+              response.send(err)
+            getPlayers(Player, response);
+          });
         });
+      });
     });
 
   app.use('/api', router);
