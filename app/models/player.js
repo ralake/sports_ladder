@@ -2,11 +2,11 @@ module.exports = function(playerRepo) {
 
   return {
 
-    getPlayers: function(response) {
+    getPlayers: function(callback) {
        playerRepo.find().sort('rank').exec(function (err, players) {
        if (err)
-         responce.send(err)
-       response.json(players); 
+         callback(err)
+       callback(null, players); 
      });
     },
 
