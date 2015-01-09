@@ -1,0 +1,22 @@
+body {
+  padding: 2%;
+  background-image: url('./../images/Background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#ladder {
+  width: 55%;
+  border-style: solid;
+  border-width:  1px;
+  border-color: gray;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: rgba(0.5,0.5,0.5,0.5);
+  color: #5A5A5A;
+}
+
+#ladder_row:hover {
+  background-color: #313131;
+}

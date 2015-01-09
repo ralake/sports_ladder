@@ -1,11 +1,12 @@
 <!DOCTYPE HTML> 
 <html ng-app="SportsLadder">
   <head>
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
     <script src="js/controllers/main.js"></script>
     <script src="js/services/players.js"></script>
     <script src="js/core.js"></script>
@@ -13,7 +14,7 @@
   </head>
   <body ng-controller="mainController">  
     <h1>Sports Ladder</h1>
-    <table class="table table-hover">
+    <table class="table table-hover" id="ladder">
       <thead>
         <tr>
           <th class="col-md-6">Rank</th>
@@ -21,7 +22,7 @@
         </tr>
       </thead>
       <tbody ng-repeat="player in players">
-        <tr class="{{player.name}}">
+        <tr class="{{player.name}}" id="ladder_row">
           <td> {{ player.rank }} </td>
           <td> {{ player.name }} </td>
         </tr>
