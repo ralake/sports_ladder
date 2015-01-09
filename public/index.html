@@ -1,7 +1,6 @@
 <!DOCTYPE HTML> 
 <html ng-app="SportsLadder">
   <head>
-    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
@@ -14,11 +13,11 @@
   </head>
   <body ng-controller="mainController">  
     <h1>Sports Ladder</h1>
-    <table class="table table-hover" id="ladder">
+    <table id="ladder">
       <thead>
         <tr>
-          <th class="col-md-6">Rank</th>
-          <th class="col-md-6">Name</th>
+          <th id="rank">Rank</th>
+          <th>Name</th>
         </tr>
       </thead>
       <tbody ng-repeat="player in players">
@@ -29,18 +28,12 @@
       </tbody>
     </table>
     <noplayers ng-hide="players">There are no players</noplayers>
-    <div class="row">
-      <div class="col-lg-6">
         <form id="addplayer">
           <div class="input-group">
-            <input name="name" placeholder="Name" class="form-control col-md-4" type="text" ng-model="formData.name">
-            <span class="input-group-btn">
+            <input name="name" placeholder="Name" type="text" ng-model="formData.name">
               <button class="btn btn-default btn-primary" type="submit" value="Add Player" ng-click="createPlayer()">Add Player</button>
-            </span>
           </div>
         </form>
-      </div>
-    </div>
     <form id="update-rank" class="col-lg-6">
 
       <select ng-init="formData.winner" = options[0]" name="winner" class="form-control" ng-model="formData.winner" ng-options="player.name for player in players">
