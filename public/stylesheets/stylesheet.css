@@ -11,14 +11,25 @@ h1 {
   -ms-transform: rotate(30deg);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);  /* IE6,IE7 */
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)"; /* IE8 */
+  display:none;
+}
+
+noplayers {
+  color: white;
 }
 
 body {
   padding: 2%;
-  background-image: url('./../images/Background.png');
-  background-size: cover;
+  background-image: url('./../images/BackgroundStraight.jpg');
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+img {
+  width:100%;
+  position: fixed;
+  display:none;
 }
 
 #ladder {
