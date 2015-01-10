@@ -10,19 +10,19 @@ module.exports = function(playerRepo) {
      });
     },
 
-    addPlayer: function(request, response, callback) {
-      playerRepo.find(function(err, players) {
+    addPlayer: function(params, callback) {
+      playerRepo.create({
+        name : params.name,
+        rank : params.count
+      }, function(err, player){
         if (err)
-          console.log(err)
-        playerRepo.create({
-          name : request.body.name,
-          rank : (players.length + 1)
-        }, function(err, player){
+          callback(err)
+        playerRepo.find(function(err, players) {
           if (err)
-            console.log(err)
-          });
+            callback(err)
+          callback(null, players); 
+        });
       });
-      callback();
     }, 
 
     updatePlayerRanks: function(requestWinner, requestLoser){

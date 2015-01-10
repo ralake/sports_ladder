@@ -15,23 +15,12 @@ var routes = function(app, router) {
     })
 
     .post(function(request, response){
-      PlayerRepository.find(function(err, players) {
-          if (err)
-            response.send(err)
-      PlayerRepository.create({
-        name : request.body.name,
-        rank : (players.length + 1) 
-      }, function(err, player) {
-        if (err)
+      Player(PlayerRepository).addPlayer(request.body, function(err, players) {
+        if(err)
           response.send(err)
-        Player(PlayerRepository).getPlayers(function(err, players) {
-          if(err)
-            response.send(err)
         response.json(players)
-        });
-        });
-      }); 
-    });
+      });
+    }); 
 
   router.route('/search')
 
