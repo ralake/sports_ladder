@@ -2,6 +2,8 @@
 [![Test Coverage](https://codeclimate.com/github/ralake/sports_ladder/badges/coverage.svg)](https://codeclimate.com/github/ralake/sports_ladder)
 [![Code Climate](https://codeclimate.com/github/ralake/sports_ladder/badges/gpa.svg)](https://codeclimate.com/github/ralake/sports_ladder)
 
+Visit the project [here](http://sportsladder.herokuapp.com/).
+
 Image to go here. 
     
 | Languages | Technologies  | Testing Frameworks| Misc
