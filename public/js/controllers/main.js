@@ -11,6 +11,7 @@ angular.module("playerController", [])
 
     $scope.createPlayer = function() {
       if (!$.isEmptyObject($scope.formData)) {
+        $scope.formData.rank = ($scope.players.length + 1);
         Players.create($scope.formData)
         .success(function(data) {
           $scope.formData = {};

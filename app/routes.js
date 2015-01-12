@@ -15,6 +15,7 @@ var routes = function(app, router) {
     })
 
     .post(function(request, response){
+      console.log(request)
       Player(PlayerRepository).addPlayer(request.body, function(err, players) {
         if(err)
           response.send(err)

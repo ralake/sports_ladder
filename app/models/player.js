@@ -13,11 +13,11 @@ module.exports = function(playerRepo) {
     addPlayer: function(params, callback) {
       playerRepo.create({
         name : params.name,
-        rank : playerRepo.count() 
+        rank : params.rank 
       }, function(err, player){
         if (err)
           callback(err)
-        playerRepo.find(function(err, players) {
+        playerRepo.find().sort('rank').exec(function (err, players) {
           if (err)
             callback(err)
           callback(null, players); 
