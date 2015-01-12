@@ -1,14 +1,4 @@
 angular.module("playerService", [])
-  .factory('Players', function($http) {
-    return {
-      get : function() {
-        return $http.get('/api/players');
-      },
-      create : function(playerData) {
-        return $http.post('/api/players', playerData);
-      },
-      update : function(playerData) {
-        return $http.post('/api/search', playerData);
-      }
-    }
+  .factory('Player', function($resource) {
+    return $resource('/api/players/:id', {}, {'save': {method: 'POST', isArray: true}} );
   });

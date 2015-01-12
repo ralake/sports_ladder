@@ -1,34 +1,25 @@
-angular.module("playerController", [])
+angular.module("playerController", ["ngResource"])
 
-  .controller('mainController', function($scope, $http, Players) {
+  .controller('mainController', function($scope, Player) {
 
     $scope.formData = {};
-
-    Players.get()
-      .success(function(data) {
-        $scope.players = data;
-      })
+    
+    $scope.players = Player.query(function() {
+    });
 
     $scope.createPlayer = function() {
       if (!$.isEmptyObject($scope.formData)) {
-        $scope.formData.rank = ($scope.players.length + 1);
-        Players.create($scope.formData)
-        .success(function(data) {
-          $scope.formData = {};
-          $scope.players = data;
-        });
-      }
-    };
 
-    $scope.updateLadder = function() {
-      if (!$.isEmptyObject($scope.formData)) {
-        Players.update($scope.formData)
-        .success(function(data) {
-          $scope.formData = {};
-          $scope.players = data;
-        });
-      }
+        var player = new Player();
 
+        player.name = $scope.formData.name;
+        player.rank = ($scope.players.length + 1);
+
+        Player.save(player, function(players) {
+          $scope.players = players;
+          $scope.formData = {}; 
+        });
+      };
     };
 
   });
