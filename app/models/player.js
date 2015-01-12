@@ -13,7 +13,7 @@ module.exports = function(playerRepo) {
     addPlayer: function(params, callback) {
       playerRepo.create({
         name : params.name,
-        rank : params.count
+        rank : playerRepo.count() 
       }, function(err, player){
         if (err)
           callback(err)
