@@ -8,7 +8,7 @@ module.exports = function(grunt) {
         '-W030' : true
         },
       },
-    files: ['Gruntfile.js', 'test/*.js', 'server.js', 'app/*.js'],
+    files: ['Gruntfile.js', 'test/*.js', 'server.js', 'app/**/*.js'],
       options: {
         globals: {
           jQuery: true,

@@ -10,10 +10,10 @@ module.exports = function(playerRepo) {
      });
     },
 
-    addPlayer: function(params, callback) {
+    addPlayer: function(player, callback) {
       playerRepo.create({
-        name : params.name,
-        rank : params.rank 
+        name : player.name,
+        rank : player.rank 
       }, function(err, player){
         if (err)
           callback(err)
@@ -25,29 +25,22 @@ module.exports = function(playerRepo) {
       });
     }, 
 
-    updatePlayerRanks: function(requestWinner, requestLoser){
-      this.repository.findOne({ name: requestWinner.name }, function(err, winner) {
+    updatePlayerRanks: function(winner, loser, callback){
+      var winnerRank = winner.rank
+      var loserRank = loser.rank
+      playerRepo.update({ _id: winner._id }, { $set: { rank: loserRank }}, function(err, player){
         if (err)
-          response.send(err)
-        var winnerRank = winner.rank
-       this.repository.findOne({ name: requestLoser.name }, function(err, loser) {
+          callback(err)
+        playerRepo.update({ _id: loser._id }, { $set: { rank: winnerRank }}, function(err, player){
           if (err)
-            response.send(err)
-          var loserRank = loser.rank
-          winner.rank = loserRank
-          winner.save(function(err) {
+            callback(err)
+          playerRepo.find().sort('rank').exec(function (err, players) {
             if (err)
-              response.send(err)
-          });
-          loser.rank = winnerRank
-         loser.save(function(err) {
-            if (err)
-              response.send(err)
-            getPlayers();
+              callback(err)
+            callback(null, players); 
           });
         });
       });
     }
-
   };
 };
