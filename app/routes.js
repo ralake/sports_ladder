@@ -15,10 +15,10 @@ var routes = function(app, router) {
     })
 
     .post(function(request, response){
-      Player(PlayerRepository).addPlayer(request.body, function(err, players) {
+      Player(PlayerRepository).addPlayer(request.body, function(err, player) {
         if(err)
           response.send(err)
-        response.json(players)
+        response.json(player)
       });
     }); 
 

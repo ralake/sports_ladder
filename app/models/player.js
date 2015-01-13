@@ -17,11 +17,7 @@ module.exports = function(playerRepo) {
       }, function(err, player){
         if (err)
           callback(err)
-        playerRepo.find().sort('rank').exec(function (err, players) {
-          if (err)
-            callback(err)
-          callback(null, players); 
-        });
+        callback(player)
       });
     }, 
 
