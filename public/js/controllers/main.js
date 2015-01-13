@@ -5,8 +5,11 @@ angular.module("playerController", ["ngResource"])
     $scope.players = Player.query();
 
     $scope.createPlayer = function() {
-      $scope._renderPlayer();
-      $scope._postPlayer();
+      if (!$.isEmptyObject($scope.newPlayer)) {
+        $scope._renderPlayer(function() {
+          $scope._postPlayer();
+        });
+      };
       $scope.newPlayer = {};  
     };
 
@@ -14,20 +17,19 @@ angular.module("playerController", ["ngResource"])
       return $scope.players.length + 1;
     };
     
-    $scope._renderPlayer = function() {
-        $scope.players.push({
-          name: $scope.newPlayer.name, 
-          rank: $scope.players.length + 1
-        })
+    $scope._renderPlayer = function(callback) {
+      $scope.players.push({
+        name: $scope.newPlayer.name, 
+        rank: $scope.players.length + 1
+      })
+      callback();
     };
 
     $scope._postPlayer = function() {
-      if (!$.isEmptyObject($scope.newPlayer)) {
-        var player = new Player();
-        player.name = $scope.newPlayer.name;
-        player.rank = $scope.players.length
-        player.$save();
-      }
+      var player = new Player();
+      player.name = $scope.newPlayer.name;
+      player.rank = $scope.players.length
+      player.$save();
     };
 
     $scope.updateLadder = function() {
