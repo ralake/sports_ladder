@@ -101,6 +101,14 @@ form {
   font-size: 15px;
 }
 
+#addplayerbutton:focus {
+  outline: none;
+}
+
+#swapbutton:focus {
+  outline: none;
+}
+
 .form-control:focus {
   outline: none;
 }
