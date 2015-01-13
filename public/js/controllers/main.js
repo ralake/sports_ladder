@@ -5,29 +5,31 @@ angular.module("playerController", ["ngResource"])
     $scope.players = Player.query();
 
     $scope.createPlayer = function() {
+      $scope._renderPlayer();
       $scope._postPlayer();
-      $scope._clearForm();
+      $scope.newPlayer = {};  
     };
 
     $scope.newPlayerRank = function() {
       return $scope.players.length + 1;
     };
+    
+    $scope._renderPlayer = function() {
+        $scope.players.push({
+          name: $scope.newPlayer.name, 
+          rank: $scope.players.length + 1
+        })
+    }
 
     $scope._postPlayer = function() {
       if (!$.isEmptyObject($scope.newPlayer)) {
         var player = new Player();
         player.name = $scope.newPlayer.name;
-        player.rank = $scope.newPlayerRank();
-        player.$save(function(player){
-          $scope.players.push(player);
-        });
+        player.rank = $scope.players.length
+        player.$save();
       }
     };
 
-    $scope._clearForm = function() {
-      $scope.newPlayer = {};  
-      $scope.addPlayer.$setPristine();
-    };
 
   });
 
