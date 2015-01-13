@@ -12,8 +12,15 @@ describe('playerController', function() {
     });
   }));
 
-  it('should initialise with an empty add player term', function() {
+  it('should initialise with an empty players resource', function() {
     expect(scope.players).toBeDefined();
+  });
+
+  it('it can create a new player rank ', function() {
+   expect(scope.newPlayerRank()).toEqual(3); 
+  });
+
+  it('new test', function(){
   });
 
 });
