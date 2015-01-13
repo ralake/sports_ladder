@@ -21,8 +21,8 @@ module.exports = function(playerRepo) {
       });
     }, 
 
-    updatePlayerRank: function(player, newRank, callback){
-      playerRepo.update({ _id: player._id }, { $set: { rank: newRank }}, function(err, player){
+    updatePlayerRank: function(param, id, callback){
+      playerRepo.findByIdAndUpdate(id, { rank: param.newRank }, null, function(err, player){
         if (err)
           callback(err)
         callback(null, player); 

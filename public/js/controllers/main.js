@@ -30,19 +30,29 @@ angular.module("playerController", ["ngResource"])
       }
     };
 
-    $scope._swapRanks = function() {
+    $scope.updateLadder = function() {
       var winnerRank = $scope.winner.rank;
       var loserRank = $scope.loser.rank;
+      $scope._swapViewRanks(loserRank, winnerRank);
+      $scope._swapDbRanks(loserRank, winnerRank);
+    };
+
+    $scope._swapViewRanks = function(loserRank, winnerRank) {
       $scope.winner.rank = loserRank;
       $scope.loser.rank = winnerRank;
     };
 
-    $scope.updateLadder = function() {
-      $scope._swapRanks();
+    $scope._updatePlayerRank = function(playerID, updatedRank) {
+      Player.update({ id: playerID }, { newRank: updatedRank });
     };
 
 
-
+    $scope._swapDbRanks = function(loserRank, winnerRank) {
+      Player.query(function() {
+        $scope._updatePlayerRank($scope.loser._id, winnerRank);
+        $scope._updatePlayerRank($scope.winner._id, loserRank);
+      });
+    };
 
   });
 
