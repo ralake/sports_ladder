@@ -16,7 +16,7 @@
     <h1>sportslad</h1>
     <table id="ladder">
       <tbody>
-        <tr ng-repeat="player in players" class="{{player.name}}" id="ladder_row">
+        <tr ng-repeat="player in players | orderBy : 'rank'" class="{{player.name}}" id="ladder_row">
           <td id="rank" ng-bind="player.rank"></td>
           <td id="name" ng-bind="player.name"></td>
           <td id="rank" class="rankright" ng-bind="player.rank"></td>
@@ -31,10 +31,10 @@
     <noplayers ng-hide="players">There are no players</noplayers>
 
     <form id="update-rank" class="col-lg-6">
-      <select ng-init="formData.winner = options[0]" name="winner" class="form-control" ng-model="formData.winner" ng-options="player.name for player in players">
+      <select ng-init="winner = options[0]" name="winner" class="form-control" ng-model="winner" ng-options="player.name for player in players | orderBy : 'rank'">
         <option class="form-control-option" value="">Select Player 1 </option>
       </select>
-      <select ng-init="formData.loser = options[0]" name="loser" class="form-control" ng-model="formData.loser" ng-options="player.name for player in players">
+      <select ng-init="loser = options[0]" name="loser" class="form-control" ng-model="loser" ng-options="player.name for player in players | orderBy : 'rank'">
         <option value=""> Select Player 2</option>
       </select>
       <button class="button" id="swapbutton"type="submit" value="Update Ladder" ng-click="updateLadder()">Swap</button>

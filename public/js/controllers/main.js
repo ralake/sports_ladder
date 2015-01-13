@@ -30,9 +30,15 @@ angular.module("playerController", ["ngResource"])
       }
     };
 
+    $scope._swapRanks = function() {
+      var winnerRank = $scope.winner.rank;
+      var loserRank = $scope.loser.rank;
+      $scope.winner.rank = loserRank;
+      $scope.loser.rank = winnerRank;
+    };
+
     $scope.updateLadder = function() {
-      console.log($scope.formData.winner)
-      console.log($scope.formData.loser)
+      $scope._swapRanks();
     };
 
 

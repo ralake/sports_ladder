@@ -3,7 +3,7 @@ module.exports = function(playerRepo) {
   return {
 
     getPlayers: function(callback) {
-       playerRepo.find().sort('rank').exec(function (err, players) {
+       playerRepo.find(function (err, players) {
        if (err)
          callback(err)
        callback(null, players); 
