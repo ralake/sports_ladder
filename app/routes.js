@@ -31,6 +31,16 @@ var routes = function(app, router) {
         response.json(players)
       });
     }); 
+    
+  router.route('/players/:id')
+
+    .put(function(request, response) {
+      Player(PlayerRepostiory).updatePlayerRank(request.body, function(err, player) {
+        if(err)
+          response.send(err)
+        response.json(player)
+      });
+    });
         
 
   app.use('/api', router);

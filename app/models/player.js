@@ -17,25 +17,15 @@ module.exports = function(playerRepo) {
       }, function(err, player){
         if (err)
           callback(err)
-        callback(player)
+        callback(null, player)
       });
     }, 
 
-    updatePlayerRanks: function(winner, loser, callback){
-      var winnerRank = winner.rank
-      var loserRank = loser.rank
-      playerRepo.update({ _id: winner._id }, { $set: { rank: loserRank }}, function(err, player){
+    updatePlayerRank: function(player, newRank, callback){
+      playerRepo.update({ _id: player._id }, { $set: { rank: newRank }}, function(err, player){
         if (err)
           callback(err)
-        playerRepo.update({ _id: loser._id }, { $set: { rank: winnerRank }}, function(err, player){
-          if (err)
-            callback(err)
-          playerRepo.find().sort('rank').exec(function (err, players) {
-            if (err)
-              callback(err)
-            callback(null, players); 
-          });
-        });
+        callback(null, player); 
       });
     }
   };

@@ -19,7 +19,7 @@ angular.module("playerController", ["ngResource"])
           name: $scope.newPlayer.name, 
           rank: $scope.players.length + 1
         })
-    }
+    };
 
     $scope._postPlayer = function() {
       if (!$.isEmptyObject($scope.newPlayer)) {
@@ -29,6 +29,13 @@ angular.module("playerController", ["ngResource"])
         player.$save();
       }
     };
+
+    $scope.updateLadder = function() {
+      console.log($scope.formData.winner)
+      console.log($scope.formData.loser)
+    };
+
+
 
 
   });
