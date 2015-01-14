@@ -39,6 +39,12 @@ angular.module("playerController", ["ngResource"])
       $scope._swapDbRanks(loserRank, winnerRank);
     };
 
+    $scope.evaluateResult = function() {
+      if ($scope.winner.rank < $scope.loser.rank) {
+      } else {
+      }
+    };
+
     $scope._swapViewRanks = function(loserRank, winnerRank) {
       $scope.winner.rank = loserRank;
       $scope.loser.rank = winnerRank;

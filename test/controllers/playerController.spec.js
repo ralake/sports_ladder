@@ -38,4 +38,18 @@ describe('playerController', function() {
     expect(scope.loser.rank).toEqual(2);
   });
 
+  it('when the challenger loses, the ranks will not change', function(){
+    scope.players = [{name: 'Rich', rank: 1},
+                     {name: 'Ed', rank: 2},
+                     {name: 'Nick', rank: 3},
+                     {name: 'Ben', rank: 4},
+                     {name: 'Blease', rank: 5}];
+    scope.winner = {name: 'Ed', rank: 2};
+    scope.loser = {name: 'Nick', rank: 3};
+    scope.evaluateResult();
+    expect(scope.winner.rank).toEqual(2);
+    expect(scope.loser.rank).toEqual(3);
+  });
+
+
 });
