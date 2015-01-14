@@ -34,7 +34,7 @@
       <select ng-init="winner = options[0]" name="winner" class="form-control" ng-model="winner" ng-options="player.name for player in players | orderBy : 'rank'">
         <option class="form-control-option" value=""> Winner </option>
       </select>
-      <select ng-init="loser = options[0]" name="loser" class="form-control" ng-model="loser" ng-options="player.name for player in players | orderBy : 'rank'">
+      <select ng-init="loser = options[0]" name="loser" class="form-control" ng-model="loser" ng-options="player.name for player in players | filter: { name: '!' + winner.name } | orderBy : 'rank'">
         <option value=""> Loser </option>
       </select>
       <button class="button" id="swapbutton"type="submit" value="Update Ladder" ng-click="updateLadder()">Update Ladder</button>
