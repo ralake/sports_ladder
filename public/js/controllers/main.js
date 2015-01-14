@@ -5,7 +5,7 @@ angular.module("playerController", ["ngResource"])
     $scope.players = Player.query();
 
     $scope.createPlayer = function() {
-      if (!$.isEmptyObject($scope.newPlayer)) {
+      if ($scope.newPlayer != {}) {
         $scope._renderPlayer(function() {
           $scope._postPlayer();
         });
