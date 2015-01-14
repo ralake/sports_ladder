@@ -5,11 +5,12 @@
 ![pingponggif](http://blog.uberpong.com/wp-content/uploads/2012/10/Forrest-Gump-ping-pong-funny.gif)
     
 | Languages | Technologies  | Testing Tools| Misc
-| :-------------------------------------------- |:--------------|:-----------|:----|
-| Javascript| [Mongodb](http://www.mongodb.org/)       | [Mocha](http://mochajs.org/)             | [Grunt](http://gruntjs.com/) |
-| HTML      | [Expressjs](http://expressjs.com/)     | [Mocha-Casperjs](https://www.npmjs.com/package/mocha-casperjs)    | [Trello](https://trello.com/b/Xf9OmLhD/table-tennis-ladr) |
-| CSS       | [Angularjs](https://angularjs.org/)     | [Hippie](https://github.com/vesln/hippie)
-|           | [Nodejs](http://nodejs.org/)        | [Chai](http://chaijs.com/); 
+| :---------------------------------------------- |:----------------------------------------------------------------|:-----------|:----|
+| Javascript| [Mongodb](http://www.mongodb.org/)  | [Mocha](http://mochajs.org/)                                    | [Grunt](http://gruntjs.com/) |
+| HTML      | [Expressjs](http://expressjs.com/)  | [Mocha-Casperjs](https://www.npmjs.com/package/mocha-casperjs)  | [Trello](https://trello.com/b/Xf9OmLhD/table-tennis-ladr) |
+| CSS       | [Angularjs](https://angularjs.org/) | [Hippie](https://github.com/vesln/hippie)                       |
+|           | [Nodejs](http://nodejs.org/)        | [Chai](http://chaijs.com/)                                      | 
+|           |                                     | [Karma](http://karma-runner.github.io/0.12/index.html);
 
 
 ###Brief
@@ -32,7 +33,8 @@ the app.
      
 **Testing:** Our initial understanding of JS frameworks, led us to believe that testing would be challenging. Based on research in version 0, we decided upon the following testing suites: 
 + **Acceptance Testing**:  [Mocha](http://mochajs.org/); [Mocha-Casperjs](https://www.npmjs.com/package/mocha-casperjs) & [Chai](http://chaijs.com/); 
-+ **Unit Testing**: [Mocha](http://mochajs.org/)
++ **Unit Testing**: [Mocha](http://mochajs.org/) & [Chai](http://chaijs.com/)
+  & [Karma](http://karma-runner.github.io/0.12/index.html);
 + **API Testing**: [Hippie](https://github.com/vesln/hippie) 
       
 Our test suites were automated using [Grunt](http://gruntjs.com/). 
@@ -47,6 +49,26 @@ ___________________________________________________________________
 + Feature 1: Users can see the ladder   
 + Feature 2: Users can add themselves to the ladder  
 + Feature 3: Users can swap positions on the ladder
+
+#####Version 1.5: Refactoring/Increase Angular Responsibility 
+
+After presenting our product V1, we decided to continue to refactor the code,
+in order to assist with testing. The community surrounding the MEAN stack, was
+and is still undecided on the best structure for an app, not only on where
+responsibilities should lie, but even on folder structure. We noted that our V1
+product was not as abstracted as we thought appropriate, and in attending to
+that issue realised that AngularJS could take a larger part in the logic
+handling.
+
+Our V1.5 product now places the responsibilty for the majority of the
+logic with the Angular controllers, and the server side just acts to host our
+API. Due to the fact that a chunk of our logic has moved to the client side, we
+have introduced Karma as a testing framework.
+
+In switching to a more active Angular side, we have also taken advantage of
+Angular's $resource which allows us to render changes to the ladder
+immediately, and have AJAX requests happen in the background, this has
+considerably improved the user experience.
 
 #####Version 2: Scooter (yellow)
 
