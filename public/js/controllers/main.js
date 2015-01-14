@@ -35,13 +35,22 @@ angular.module("playerController", ["ngResource"])
     $scope.updateLadder = function() {
       var winnerRank = $scope.winner.rank;
       var loserRank = $scope.loser.rank;
-      $scope._swapViewRanks(loserRank, winnerRank);
+      $scope._evaluateResult(loserRank, winnerRank);
       $scope._swapDbRanks(loserRank, winnerRank);
     };
 
-    $scope.evaluateResult = function() {
-      if ($scope.winner.rank < $scope.loser.rank) {
+    $scope._evaluateResult = function(loserRank, winnerRank) {
+      if (winnerRank < loserRank) {
+        
       } else {
+        $scope.players.forEach(function(player) {
+          if (player.rank >= loserRank && player.rank < winnerRank) {
+            player.rank++
+          }
+        });
+        console.log(loserRank)
+        console.log($scope.winner.rank)
+        $scope.winner.rank = loserRank
       }
     };
 

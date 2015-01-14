@@ -30,8 +30,8 @@ describe('playerController', function() {
   });
 
   it('can swap players ranks in the ladder in the view', function(){
-    scope.winner = {name: 'Rich', rank: 2};
-    scope.loser = {name: 'Nick', rank: 1};
+    scope.loser = {name: 'Rich', rank: 2};
+    scope.winner = {name: 'Nick', rank: 1};
     scope.updateLadder();
     expect(scope._swapDbRanks()).toHaveBeenCalled;
     expect(scope.winner.rank).toEqual(1);
@@ -46,9 +46,26 @@ describe('playerController', function() {
                      {name: 'Blease', rank: 5}];
     scope.winner = {name: 'Ed', rank: 2};
     scope.loser = {name: 'Nick', rank: 3};
-    scope.evaluateResult();
+    scope.updateLadder();
     expect(scope.winner.rank).toEqual(2);
     expect(scope.loser.rank).toEqual(3);
+  });
+
+
+  it('when the challenger wins, the ranks will change incrementally', function(){
+    players = [{name: 'Rich'}, {name:'Ed'}, {name: 'Nick'}, {name: 'Ben'}, {name: 'Blease'}];
+    players.forEach(function(player) {
+      scope.newPlayer = player
+      scope.createPlayer();
+    });
+    scope.winner = scope.players[3];
+    scope.loser = scope.players[1];
+    scope.updateLadder();
+    expect(scope.players).toEqual([{name: 'Rich', rank: 1},
+                                   {name: 'Ed', rank: 3},
+                                   {name: 'Nick', rank: 4},
+                                   {name: 'Ben', rank: 2},
+                                   {name: 'Blease', rank: 5}]);
   });
 
 
