@@ -29,11 +29,11 @@ describe('playerController', function() {
     expect(scope.newPlayer).toEqual({});
   });
 
-  it('can swap players ranks in the ladder in the view', function(){
+  it('can update players ranks in the ladder in the view', function(){
     scope.loser = {name: 'Rich', rank: 2};
     scope.winner = {name: 'Nick', rank: 1};
     scope.updateLadder();
-    expect(scope._swapDbRanks()).toHaveBeenCalled;
+    expect(scope._updateDbRanks()).toHaveBeenCalled;
     expect(scope.winner.rank).toEqual(1);
     expect(scope.loser.rank).toEqual(2);
   });

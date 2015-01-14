@@ -32,12 +32,12 @@
 
     <form id="update-rank" class="col-lg-6">
       <select ng-init="winner = options[0]" name="winner" class="form-control" ng-model="winner" ng-options="player.name for player in players | orderBy : 'rank'">
-        <option class="form-control-option" value="">Select Player 1 </option>
+        <option class="form-control-option" value=""> Winner </option>
       </select>
       <select ng-init="loser = options[0]" name="loser" class="form-control" ng-model="loser" ng-options="player.name for player in players | orderBy : 'rank'">
-        <option value=""> Select Player 2</option>
+        <option value=""> Loser </option>
       </select>
-      <button class="button" id="swapbutton"type="submit" value="Update Ladder" ng-click="updateLadder()">Swap</button>
+      <button class="button" id="swapbutton"type="submit" value="Update Ladder" ng-click="updateLadder()">Update Ladder</button>
     </form>
 
         <form id="addplayer" name="addPlayer">
