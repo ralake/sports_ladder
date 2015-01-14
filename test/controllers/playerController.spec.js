@@ -18,7 +18,7 @@ describe('playerController', function() {
   });
 
   it('it can create a new player rank ', function() {
-   expect(scope.newPlayerRank()).toEqual(1); 
+    expect(scope.newPlayerRank()).toEqual(1); 
   });
 
   it('creates a new player', function(){
@@ -28,4 +28,11 @@ describe('playerController', function() {
     expect(scope.newPlayer).toEqual({});
   });
 
+  it('can swap players ranks in the ladder', function(){
+    scope.winner = {name: 'Rich', rank: 2};
+    scope.loser = {name: 'Nick', rank: 1};
+    scope.updateLadder();
+    expect(scope.winner.rank).toEqual(1);
+    expect(scope.loser.rank).toEqual(2);
+  });
 });
