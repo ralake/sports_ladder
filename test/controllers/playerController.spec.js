@@ -3,9 +3,8 @@ describe('playerController', function() {
 
   var scope, factory, ctrl;
 
-  beforeEach(inject(function($rootScope, $injector, $controller, Player) {
+  beforeEach(inject(function($rootScope, $controller, Player) {
     factory = Player;
-    $httpBackend = $injector.get('$httpBackend');
     scope = $rootScope.$new();
     ctrl = $controller('mainController', {
       $scope: scope,
@@ -13,16 +12,6 @@ describe('playerController', function() {
     });
 
   }));
-
-  afterEach(function() {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-  }); 
-  
-  it('should get players from the db on initialisation', function() {
-    $httpBackend.expectGET('/api/players');
-    $httpBackend.flush();
-  });
 
   it('should initialise with an empty players resource', function() {
     expect(scope.players).toEqual([]);
@@ -32,9 +21,10 @@ describe('playerController', function() {
     expect(scope.newPlayerRank()).toEqual(1); 
   });
 
-  it('creates a new player in the view', function(){
+  it('creates a new player to render in the view', function(){
     scope.newPlayer = { name: 'Rich', rank: 1 };
     scope.createPlayer();
+    expect(scope._postPlayer()).toHaveBeenCalled;
     expect(scope.players).toEqual([{ name: 'Rich', rank: 1 }]);
     expect(scope.newPlayer).toEqual({});
   });
@@ -43,18 +33,9 @@ describe('playerController', function() {
     scope.winner = {name: 'Rich', rank: 2};
     scope.loser = {name: 'Nick', rank: 1};
     scope.updateLadder();
+    expect(scope._swapDbRanks()).toHaveBeenCalled;
     expect(scope.winner.rank).toEqual(1);
     expect(scope.loser.rank).toEqual(2);
   });
-
-  it('creates a new player in the db', function(){
-    $httpBackend.flush();
-    $httpBackend.expectPOST('/api/players', { name: 'Rich', rank: 1 }).respond(404);
-    scope.newPlayer = { name: 'Rich', rank: 1 };
-    scope.createPlayer();
-    expect(scope.players).toEqual([{ name: 'Rich', rank: 2 }]);
-    expect(scope.newPlayer).toEqual({});
-  });
-
 
 });
