@@ -70,8 +70,23 @@ angular.module("playerController", ["ngResource"])
             $scope._updatePlayerRank(player._id, player.rank);           
           }
         });
-      });
-    };
+      })
+    }
+  })
 
-  });
+
+  .filter('rankFilterTest', function() {
+    return function( items, rank ) {
+      var range = items.length / 4; 
+      var filtered = [];
+      angular.forEach(items, function(item) {
+        if(item.rank >= rank - range && item.rank <= rank + range ) {
+           filtered.push(item);
+        }
+      });
+    return filtered;
+    };
+  })
+
+
 
