@@ -27,7 +27,7 @@ describe('playerController', function() {
     scope.newPlayer = { name: 'Rich', rank: 1 };
     scope.createPlayer();
     expect(scope._postPlayer()).toHaveBeenCalled;
-    expect(scope.players).toEqual([{ name: 'Rich', rank: 1 }]);
+    expect(scope.players).toEqual([{ name: 'Rich', rank: 1, gamesPlayed: 0}]);
     expect(scope.newPlayer).toEqual({});
   });
 
@@ -62,11 +62,11 @@ describe('playerController', function() {
     scope.winner = scope.players[3];
     scope.loser = scope.players[1];
     scope.updateLadder();
-    expect(scope.players).toEqual([{name: 'Rich', rank: 1},
-                                   {name: 'Ed', rank: 3},
-                                   {name: 'Nick', rank: 4},
-                                   {name: 'Ben', rank: 2},
-                                   {name: 'Blease', rank: 5}]);
+    expect(scope.players).toEqual([{name: 'Rich', rank: 1, gamesPlayed: 0},
+                                   {name: 'Ed', rank: 3, gamesPlayed: 1},
+                                   {name: 'Nick', rank: 4, gamesPlayed: 0},
+                                   {name: 'Ben', rank: 2, gamesPlayed: 1},
+                                   {name: 'Blease', rank: 5, gamesPlayed: 0}]);
   });
 
   describe('When recording a match', function() {
@@ -80,6 +80,19 @@ describe('playerController', function() {
       expect(filter(players, 3)).toEqual([{name: 'Ed', rank: 2},
                                        {name: 'Nick', rank: 3},
                                        {name: 'Ben', rank: 4},]);
+    });
+
+    it('displays statistics about Games played', function(){
+      players = [{name: 'Rich'}, {name:'Ed'}, {name: 'Nick'}, {name: 'Ben'}, {name: 'Blease'}];
+      players.forEach(function(player) {
+        scope.newPlayer = player
+        scope.createPlayer();
+      });
+      scope.winner = scope.players[3];
+      scope.loser = scope.players[1];
+      scope.updateLadder();
+      expect(scope.winner.gamesPlayed).toEqual(1); 
+      expect(scope.loser.gamesPlayed).toEqual(1); 
     });
 
   });

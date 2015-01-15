@@ -20,7 +20,8 @@ angular.module("playerController", ["ngResource"])
     $scope._renderPlayer = function(callback) {
       $scope.players.push({
         name: $scope.newPlayer.name, 
-        rank: $scope.players.length + 1
+        rank: $scope.players.length + 1,
+        gamesPlayed: 0
       })
       callback();
     };
@@ -41,15 +42,15 @@ angular.module("playerController", ["ngResource"])
 
     $scope._evaluateResult = function(loserRank, winnerRank) {
       if (winnerRank < loserRank) {
-        
       } else {
         $scope.players.forEach(function(player) {
           if (player.rank >= loserRank && player.rank < winnerRank) {
             player.rank++
-             
           }
         });
         $scope.winner.rank = loserRank
+        $scope.winner.gamesPlayed++
+        $scope.loser.gamesPlayed++
       }
     };
 
@@ -58,8 +59,8 @@ angular.module("playerController", ["ngResource"])
       $scope.loser.rank = winnerRank;
     };
 
-    $scope._updatePlayerRank = function(playerID, updatedRank) {
-      Player.update({ id: playerID }, { newRank: updatedRank });
+    $scope._updatePlayerRank = function(playerID, updatedRank, updatedGamesPlayed) {
+      Player.update({ id: playerID }, { newRank: updatedRank, gamesPlayed: updatedGamesPlayed});
     };
 
 
@@ -67,7 +68,7 @@ angular.module("playerController", ["ngResource"])
       Player.query(function() {
         $scope.players.forEach(function(player) {
           if (player.rank >= loserRank && player.rank <= winnerRank) {
-            $scope._updatePlayerRank(player._id, player.rank);           
+            $scope._updatePlayerRank(player._id, player.rank, player.gamesPlayed);           
           }
         });
       })
