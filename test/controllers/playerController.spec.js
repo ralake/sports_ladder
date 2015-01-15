@@ -1,11 +1,13 @@
 describe('playerController', function() {
+
   beforeEach(module('SportsLadder'));
 
-  var scope, factory, ctrl;
+  var scope, factory, filter, ctrl;
 
-  beforeEach(inject(function($rootScope, $controller, Player) {
+  beforeEach(inject(function($rootScope, $controller, Player, rankFilter) {
     factory = Player;
     scope = $rootScope.$new();
+    filter = rankFilter;
     ctrl = $controller('mainController', {
       $scope: scope,
       Player: factory
@@ -51,7 +53,6 @@ describe('playerController', function() {
     expect(scope.loser.rank).toEqual(3);
   });
 
-
   it('when the challenger wins, the ranks will change incrementally', function(){
     players = [{name: 'Rich'}, {name:'Ed'}, {name: 'Nick'}, {name: 'Ben'}, {name: 'Blease'}];
     players.forEach(function(player) {
@@ -68,5 +69,19 @@ describe('playerController', function() {
                                    {name: 'Blease', rank: 5}]);
   });
 
+  describe('When recording a match', function() {
+
+    it('resitricts the range of players', function() {
+      var players = [{name: 'Rich', rank: 1},
+                     {name: 'Ed', rank: 2},
+                     {name: 'Nick', rank: 3},
+                     {name: 'Ben', rank: 4},
+                     {name: 'Blease', rank: 5}];
+      expect(filter(players, 3)).toEqual([{name: 'Ed', rank: 2},
+                                       {name: 'Nick', rank: 3},
+                                       {name: 'Ben', rank: 4},]);
+    });
+
+  });
 
 });
