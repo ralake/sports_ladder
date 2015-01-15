@@ -6,26 +6,34 @@
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-resource/angular-resource.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
-    <script src="js/controllers/main.js"></script>
-    <script src="js/filters/filter.js"></script>
-    <script src="js/services/players.js"></script>
     <script src="js/core.js"></script>
+    <script src="js/controllers/main.js"></script>
+    <script src="js/services/players.js"></script>
+    <script src="js/filters/filters.js"></script>
     <title>Sports Ladder</title>
   </head>
   <body ng-controller="mainController">  
     <img src="images/Title.jpg">
     <h1>sportslad</h1>
     <table id="ladder">
+      <thead>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Played</th>
+      </thead>
       <tbody>
         <tr ng-repeat="player in players | orderBy : 'rank'" class="{{player.name}}" id="ladder_row">
           <td id="rank" ng-bind="player.rank"></td>
           <td id="name" ng-bind="player.name"></td>
           <td id="rank" class="rankright" ng-bind="player.rank"></td>
+          <td id="name" ng-bind="player.gamesPlayed"></td>
         </tr>
          <tr id="ladder_row" ng-show="newPlayer.name">
           <td id="rank"> {{ newPlayerRank() }} </td>
           <td id="name"> {{ newPlayer.name }} </td>
           <td id="rank" class="rankright"> {{ newPlayerRank() }} </td>
+          <td id="name"> 0 </td>
         </tr>
       </tbody>
     </table>
@@ -35,7 +43,7 @@
       <select ng-init="winner = options[0]" name="winner" class="form-control" ng-model="winner" ng-options="player.name for player in players | orderBy : 'rank'">
         <option class="form-control-option" value=""> Winner </option>
       </select>
-      <select ng-init="loser = options[0]" name="loser" class="form-control" ng-model="loser" ng-options="player.name for player in players | rankFilterTest: winner.rank | orderBy : 'rank'" >
+      <select ng-init="loser = options[0]" name="loser" class="form-control" ng-model="loser" ng-options="player.name for player in players | rankMatch: winner.rank | orderBy : 'rank'" >
         <option value=""> Loser </option>
       </select>
       <button class="button" id="swapbutton"type="submit" value="Update Ladder" ng-click="updateLadder()">Update Ladder</button>

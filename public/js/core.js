@@ -1,1 +1,1 @@
-angular.module("SportsLadder", ["playerController", "playerFactory", "ngResource"])
+angular.module("SportsLadder", ["playerFilter", "playerController", "playerFactory", "ngResource"])
