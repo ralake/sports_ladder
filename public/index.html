@@ -24,10 +24,10 @@
       </thead>
       <tbody>
         <tr ng-repeat="player in players | orderBy : 'rank'" class="{{player.name}}" id="ladder_row">
-          <td id="rank" ng-bind="player.rank"></td>
-          <td id="name" ng-bind="player.name"></td>
-          <td id="rank" class="rankright" ng-bind="player.rank"></td>
-          <td id="name" ng-bind="player.gamesPlayed"></td>
+          <td id="rank" >{{ player.rank }} </td>
+          <td id="name" >{{ player.name }} </td>
+          <td id="rank" class="rankright" >{{ player.rank }} </td>
+          <td id="name" >{{ player.gamesPlayed }} </td>
         </tr>
          <tr id="ladder_row" ng-show="newPlayer.name">
           <td id="rank"> {{ newPlayerRank() }} </td>

@@ -21,7 +21,8 @@ angular.module("playerController", ["ngResource"])
       $scope.players.push({
         name: $scope.newPlayer.name, 
         rank: $scope.players.length + 1,
-        gamesPlayed: 0
+        gamesPlayed: 0, 
+        _id: 0
       })
       callback();
     };
@@ -30,49 +31,44 @@ angular.module("playerController", ["ngResource"])
       var player = new Player();
       player.name = $scope.newPlayer.name;
       player.rank = $scope.players.length
-      player.$save();
+      player.$save(function(player){
+        $scope.players[$scope.players.length - 1]._id = player._id
+      });
     };
 
     $scope.updateLadder = function() {
-      var winnerRank = $scope.winner.rank;
-      var loserRank = $scope.loser.rank;
-      $scope._evaluateResult(loserRank, winnerRank);
-      $scope._updateDbRanks(loserRank, winnerRank);
+        var winnerRank = $scope.winner.rank;
+        var loserRank = $scope.loser.rank;
+        $scope._evaluateResult(loserRank, winnerRank);
+        $scope._updateDbRanks(loserRank, winnerRank);
     };
 
-    $scope._evaluateResult = function(loserRank, winnerRank) {
-      if (winnerRank < loserRank) {
-      } else {
-        $scope.players.forEach(function(player) {
-          if (player.rank >= loserRank && player.rank < winnerRank) {
-            player.rank++
-          }
-        });
-        $scope.winner.rank = loserRank
-        $scope.winner.gamesPlayed++
-        $scope.loser.gamesPlayed++
-      }
-    };
+      $scope._evaluateResult = function(loserRank, winnerRank) {
+        if (winnerRank < loserRank) {
+        } else {
+          $scope.players.forEach(function(player) {
+            if (player.rank >= loserRank && player.rank < winnerRank) {
+              player.rank++
+            }
+          });
+          $scope.winner.rank = loserRank
+          $scope.winner.gamesPlayed++
+          $scope.loser.gamesPlayed++
+        }
+      };
 
-    $scope._swapViewRanks = function(loserRank, winnerRank) {
-      $scope.winner.rank = loserRank;
-      $scope.loser.rank = winnerRank;
-    };
-
-    $scope._updatePlayerRank = function(playerID, updatedRank, updatedGamesPlayed) {
-      Player.update({ id: playerID }, { newRank: updatedRank, gamesPlayed: updatedGamesPlayed});
-    };
-
-
-    $scope._updateDbRanks = function(loserRank, winnerRank) {
-      Player.query(function() {
+      $scope._updateDbRanks = function(loserRank, winnerRank) {
         $scope.players.forEach(function(player) {
           if (player.rank >= loserRank && player.rank <= winnerRank) {
             $scope._updatePlayerRank(player._id, player.rank, player.gamesPlayed);           
           }
         });
-      })
-    }
+      }
+
+      $scope._updatePlayerRank = function(playerID, updatedRank, updatedGamesPlayed) {
+        Player.update({ id: playerID }, { newRank: updatedRank, gamesPlayed: updatedGamesPlayed});
+      };
+
 
   })
 
