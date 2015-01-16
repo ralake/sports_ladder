@@ -2,12 +2,11 @@ describe('playerController', function() {
 
   beforeEach(module('SportsLadder'));
 
-  var scope, factory, filter, ctrl;
+  var scope, factory, ctrl;
 
-  beforeEach(inject(function($rootScope, $controller, Player, rankFilter) {
+  beforeEach(inject(function($rootScope, $controller, Player) {
     factory = Player;
     scope = $rootScope.$new();
-    filter = rankFilter;
     ctrl = $controller('mainController', {
       $scope: scope,
       Player: factory
@@ -27,7 +26,7 @@ describe('playerController', function() {
     scope.newPlayer = { name: 'Rich', rank: 1 };
     scope.createPlayer();
     expect(scope._postPlayer()).toHaveBeenCalled;
-    expect(scope.players).toEqual([{ name: 'Rich', rank: 1, gamesPlayed: 0}]);
+    expect(scope.players).toEqual([{ name: 'Rich', rank: 1, gamesPlayed: 0, _id: 0}]);
     expect(scope.newPlayer).toEqual({});
   });
 
@@ -35,7 +34,7 @@ describe('playerController', function() {
     scope.loser = {name: 'Rich', rank: 2};
     scope.winner = {name: 'Nick', rank: 1};
     scope.updateLadder();
-    expect(scope._updateDbRanks()).toHaveBeenCalled;
+    expect(scope._updateDb()).toHaveBeenCalled;
     expect(scope.winner.rank).toEqual(1);
     expect(scope.loser.rank).toEqual(2);
   });
@@ -62,25 +61,14 @@ describe('playerController', function() {
     scope.winner = scope.players[3];
     scope.loser = scope.players[1];
     scope.updateLadder();
-    expect(scope.players).toEqual([{name: 'Rich', rank: 1, gamesPlayed: 0},
-                                   {name: 'Ed', rank: 3, gamesPlayed: 1},
-                                   {name: 'Nick', rank: 4, gamesPlayed: 0},
-                                   {name: 'Ben', rank: 2, gamesPlayed: 1},
-                                   {name: 'Blease', rank: 5, gamesPlayed: 0}]);
+    expect(scope.players).toEqual([{name: 'Rich', rank: 1, gamesPlayed: 0, _id: 0},
+                                   {name: 'Ed', rank: 3, gamesPlayed: 1, _id: 0},
+                                   {name: 'Nick', rank: 4, gamesPlayed: 0, _id: 0},
+                                   {name: 'Ben', rank: 2, gamesPlayed: 1, _id: 0},
+                                   {name: 'Blease', rank: 5, gamesPlayed: 0, _id: 0}]);
   });
 
   describe('When recording a match', function() {
-
-    it('resitricts the range of players', function() {
-      var players = [{name: 'Rich', rank: 1},
-                     {name: 'Ed', rank: 2},
-                     {name: 'Nick', rank: 3},
-                     {name: 'Ben', rank: 4},
-                     {name: 'Blease', rank: 5}];
-      expect(filter(players, 3)).toEqual([{name: 'Ed', rank: 2},
-                                       {name: 'Nick', rank: 3},
-                                       {name: 'Ben', rank: 4},]);
-    });
 
     it('displays statistics about Games played', function(){
       players = [{name: 'Rich'}, {name:'Ed'}, {name: 'Nick'}, {name: 'Ben'}, {name: 'Blease'}];

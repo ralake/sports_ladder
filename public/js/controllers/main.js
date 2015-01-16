@@ -41,7 +41,7 @@ angular.module("playerController", ["ngResource"])
         var winnerRank = $scope.winner.rank;
         var loserRank = $scope.loser.rank;
         $scope._evaluateResult(loserRank, winnerRank);
-        $scope._updateDbRanks(loserRank, winnerRank);
+        $scope._updateDb(loserRank, winnerRank);
     };
 
       $scope._evaluateResult = function(loserRank, winnerRank) {
@@ -58,15 +58,15 @@ angular.module("playerController", ["ngResource"])
         }
       };
 
-      $scope._updateDbRanks = function(loserRank, winnerRank) {
+      $scope._updateDb = function(loserRank, winnerRank) {
         $scope.players.forEach(function(player) {
           if (player.rank >= loserRank && player.rank <= winnerRank) {
-            $scope._updatePlayerRank(player._id, player.rank, player.gamesPlayed);           
+            $scope._updateView(player._id, player.rank, player.gamesPlayed);           
           }
         });
       }
 
-      $scope._updatePlayerRank = function(playerID, updatedRank, updatedGamesPlayed) {
+      $scope._updateView = function(playerID, updatedRank, updatedGamesPlayed) {
         Player.update({ id: playerID }, { newRank: updatedRank, gamesPlayed: updatedGamesPlayed});
       };
 
