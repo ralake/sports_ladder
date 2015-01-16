@@ -25,7 +25,7 @@ var routes = function(app, router) {
   router.route('/players/:id')
 
     .put(function(request, response) {
-      Player(PlayerRepository).updatePlayerRank(request.body, request.params.id, function(err, player) {
+      Player(PlayerRepository).updatePlayer(request.body, request.params.id, function(err, player) {
         if(err)
           response.send(err)
         response.json(player)

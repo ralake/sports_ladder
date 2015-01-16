@@ -26,7 +26,12 @@ describe('playerController', function() {
     scope.newPlayer = { name: 'Rich', rank: 1 };
     scope.createPlayer();
     expect(scope._postPlayer()).toHaveBeenCalled;
-    expect(scope.players).toEqual([{ name: 'Rich', rank: 1, gamesPlayed: 0, _id: 0}]);
+    expect(scope.players).toEqual([{ name: 'Rich', 
+                                     rank: 1, 
+                                     gamesWon: 0, 
+                                     gamesLost: 0, 
+                                     gamesPlayed: 0, 
+                                     _id: 0}]);
     expect(scope.newPlayer).toEqual({});
   });
 
@@ -61,11 +66,11 @@ describe('playerController', function() {
     scope.winner = scope.players[3];
     scope.loser = scope.players[1];
     scope.updateLadder();
-    expect(scope.players).toEqual([{name: 'Rich', rank: 1, gamesPlayed: 0, _id: 0},
-                                   {name: 'Ed', rank: 3, gamesPlayed: 1, _id: 0},
-                                   {name: 'Nick', rank: 4, gamesPlayed: 0, _id: 0},
-                                   {name: 'Ben', rank: 2, gamesPlayed: 1, _id: 0},
-                                   {name: 'Blease', rank: 5, gamesPlayed: 0, _id: 0}]);
+    expect(scope.players).toEqual([{name: 'Rich', rank: 1, gamesWon: 0, gamesLost: 0, gamesPlayed: 0, _id: 0},
+                                   {name: 'Ed', rank: 3, gamesWon: 0, gamesLost: 1, gamesPlayed: 1, _id: 0},
+                                   {name: 'Nick', rank: 4, gamesWon: 0, gamesLost: 0,  gamesPlayed: 0, _id: 0},
+                                   {name: 'Ben', rank: 2, gamesWon: 1, gamesLost: 0, gamesPlayed: 1, _id: 0},
+                                   {name: 'Blease', rank: 5, gamesWon: 0, gamesLost: 0, gamesPlayed: 0, _id: 0}]);
   });
 
   describe('When recording a match', function() {
@@ -81,6 +86,19 @@ describe('playerController', function() {
       scope.updateLadder();
       expect(scope.winner.gamesPlayed).toEqual(1); 
       expect(scope.loser.gamesPlayed).toEqual(1); 
+    });
+
+    it('displays games won and lost for games played', function() {
+      players = [{name: 'Rich'}, {name:'Ed'}, {name: 'Nick'}, {name: 'Ben'}, {name: 'Blease'}];
+      players.forEach(function(player) {
+        scope.newPlayer = player
+        scope.createPlayer();
+      });
+      scope.winner = scope.players[3];
+      scope.loser = scope.players[1];
+      scope.updateLadder();
+      expect(scope.winner.gamesWon).toEqual(1); 
+      expect(scope.loser.gamesLost).toEqual(1); 
     });
 
   });

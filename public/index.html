@@ -20,6 +20,8 @@
         <th></th>
         <th></th>
         <th></th>
+        <th>Won</th>
+        <th>Lost</th>
         <th>Played</th>
       </thead>
       <tbody>
@@ -27,12 +29,16 @@
           <td id="rank" >{{ player.rank }} </td>
           <td id="name" >{{ player.name }} </td>
           <td id="rank" class="rankright" >{{ player.rank }} </td>
+          <td id="name" >{{ player.gamesWon }} </td>
+          <td id="name" >{{ player.gamesLost }} </td>
           <td id="name" >{{ player.gamesPlayed }} </td>
         </tr>
          <tr id="ladder_row" ng-show="newPlayer.name">
           <td id="rank"> {{ newPlayerRank() }} </td>
           <td id="name"> {{ newPlayer.name }} </td>
           <td id="rank" class="rankright"> {{ newPlayerRank() }} </td>
+          <td id="name"> 0 </td>
+          <td id="name"> 0 </td>
           <td id="name"> 0 </td>
         </tr>
       </tbody>

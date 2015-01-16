@@ -16,11 +16,13 @@ angular.module("playerController", ["ngResource"])
     $scope.newPlayerRank = function() {
       return $scope.players.length + 1;
     };
-    
+
     $scope._renderPlayer = function(callback) {
       $scope.players.push({
         name: $scope.newPlayer.name, 
         rank: $scope.players.length + 1,
+        gamesWon: 0, 
+        gamesLost: 0, 
         gamesPlayed: 0, 
         _id: 0
       })
@@ -31,6 +33,8 @@ angular.module("playerController", ["ngResource"])
       var player = new Player();
       player.name = $scope.newPlayer.name;
       player.rank = $scope.players.length;
+      player.gamesWon = 0;
+      player.gamesLost = 0;
       player.gamesPlayed = 0;
       player.$save(function(player){
         $scope.players[$scope.players.length - 1]._id = player._id
@@ -45,6 +49,10 @@ angular.module("playerController", ["ngResource"])
     };
 
       $scope._evaluateResult = function(loserRank, winnerRank) {
+        $scope.winner.gamesWon++
+        $scope.loser.gamesLost++
+        $scope.winner.gamesPlayed++
+        $scope.loser.gamesPlayed++
         if (winnerRank < loserRank) {
         } else {
           $scope.players.forEach(function(player) {
@@ -53,21 +61,22 @@ angular.module("playerController", ["ngResource"])
             }
           });
           $scope.winner.rank = loserRank
-          $scope.winner.gamesPlayed++
-          $scope.loser.gamesPlayed++
         }
       };
 
       $scope._updateDb = function(loserRank, winnerRank) {
         $scope.players.forEach(function(player) {
           if (player.rank >= loserRank && player.rank <= winnerRank) {
-            $scope._updateView(player._id, player.rank, player.gamesPlayed);           
+            $scope._updateDbPlayer(player);           
           }
         });
       }
 
-      $scope._updateView = function(playerID, updatedRank, updatedGamesPlayed) {
-        Player.update({ id: playerID }, { newRank: updatedRank, gamesPlayed: updatedGamesPlayed});
+      $scope._updateDbPlayer = function(player) {
+        Player.update({ id: player._id }, { newRank: player.rank, 
+                                            gamesWon: player.gamesWon, 
+                                            gamesLost: player.gamesLost, 
+                                            gamesPlayed: player.gamesPlayed});
       };
 
 
