@@ -30,7 +30,8 @@ angular.module("playerController", ["ngResource"])
     $scope._postPlayer = function() {
       var player = new Player();
       player.name = $scope.newPlayer.name;
-      player.rank = $scope.players.length
+      player.rank = $scope.players.length;
+      player.gamesPlayed = 0;
       player.$save(function(player){
         $scope.players[$scope.players.length - 1]._id = player._id
       });

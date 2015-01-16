@@ -13,7 +13,8 @@ module.exports = function(playerRepo) {
     addPlayer: function(player, callback) {
       playerRepo.create({
         name : player.name,
-        rank : player.rank 
+        rank : player.rank, 
+        gamesPlayed : player.gamesPlayed
       }, function(err, player){
         if (err)
           callback(err)
@@ -22,7 +23,7 @@ module.exports = function(playerRepo) {
     }, 
 
     updatePlayerRank: function(param, id, callback){
-      playerRepo.findByIdAndUpdate(id, { rank: param.newRank }, null, function(err, player){
+      playerRepo.findByIdAndUpdate(id, { rank: param.newRank, gamesPlayed: param.gamesPlayed }, null, function(err, player){
         if (err)
           callback(err)
         callback(null, player); 
