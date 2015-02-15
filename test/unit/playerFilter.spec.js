@@ -3,7 +3,7 @@ describe('filter', function() {
   beforeEach(module('playerFilter'));
 
   describe('rankMatch', function() {
-  
+
     it('resitricts the range of players',
       inject(function(rankMatchFilter) {
       var players = [{name: 'Rich', rank: 1},
