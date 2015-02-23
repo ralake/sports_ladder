@@ -29,7 +29,7 @@ describe('Homepage', function (){
         });
     });
 
-    it('shows the player\'s rank', function() {
+    it("shows the player's rank", function() {
       casper.then(function() {
         this.fill('form[id="addplayer"]',{
         name: 'Nick'
@@ -42,20 +42,5 @@ describe('Homepage', function (){
       });
     });
   });
-
-  // describe('When a player wins', function(){
-  //   it('their rank updates when they swap with their opponent', function(){
-  //     casper.then(function(){
-  //       this.fill('form[id="update-rank"]', {
-  //         winner: "Nick",
-  //         loser: "Ben"
-  //       }, true);
-  //       this.click('button[value="Update Ladder"]');
-  //     });
-  //     casper.then(function(){
-  //       expect(".Nick").to.contain.text("1");
-  //     });
-  //   }); 
-  // });
 
 });
