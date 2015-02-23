@@ -4,8 +4,7 @@ module.exports = function(playerRepo) {
 
     getPlayers: function(callback) {
        playerRepo.find(function (err, players) {
-       if (err)
-         callback(err)
+       if (err) callback(err)
        callback(null, players); 
      });
     },
@@ -18,8 +17,7 @@ module.exports = function(playerRepo) {
         gamesLost : player.gamesLost,
         gamesPlayed : player.gamesPlayed
       }, function(err, player){
-        if (err)
-          callback(err)
+        if (err) callback(err)
         callback(null, player)
       });
     }, 
@@ -30,8 +28,7 @@ module.exports = function(playerRepo) {
                                          gamesLost: param.gamesLost, 
                                          gamesPlayed: param.gamesPlayed }, 
                                          null, function(err, player){
-        if (err)
-          callback(err)
+        if (err) callback(err)
         callback(null, player); 
       });
     }
